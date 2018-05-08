@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+ .modal-header,h4, .close {
+      background-color: #282828;
+	  height:20px;
+      color: #ffffff !important;
+      text-align: center;
+      font-size: 20px;
+  }
+  .modal-header, .modal-body {
+      padding: 40px 50px;
+  }
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+	
+	/* form validation */
+	
+	.btn 
+  {
+   outline:0;
+   border:none;
+   border-top:none;
+   border-bottom:none;
+   border-left:none;
+   border-right:none;
+   box-shadow:inset 2px -3px rgba(0,0,0,0.15);
+  }
+  .btn:focus
+  {
+   outline:0;
+   -webkit-outline:0;
+   -moz-outline:0;
+  }
+  .form-signin {
+    max-width: 280px;
+    padding: 15px;
+    margin: 0 auto;
+      margin-top:50px;
+  }
+  .form-signin .form-signin-heading, .form-signin {
+    margin-bottom: 10px;
+  }
+  .form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: none;
+    border-left-style: solid;
+    border-color: #000;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: none;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-color: rgb(0,0,0);
+    border-top:1px solid rgba(0,0,0,0.08);
+  }
+  .form-signin-heading {
+    color: blue;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+  }
+	
+	</style>
+</head>
+<body style="background-color:#3399CC !important">
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+	
+      <a class="navbar-brand"><span style="color:white !important">NEWS RECOMMENDATION SYSTEM</span></a>
+    </div>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+	<li><a data-toggle="modal" data-target="#myModal2" style="cursor:pointer;">Instructions</a></li>
+        <li><a data-toggle="modal" data-target="#myModal" style="cursor:pointer;">About</a></li>
+        <li><a data-toggle="modal" data-target="#myModal1" style="cursor:pointer;">Project</a></li>
+        <li><a href="home.html" style="cursor:pointer;">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">    
+  <div class="row content">
+    <div class="col-sm-2 ">
+    
+    </div>
+    <div class="col-sm-8 text-left">
+	<h1 class="text-center text-uppercase text-primary" style="color:#282828;">WELCOME <span id="head-title2" style="color:#282828 !important"></span>
+</h1>
+	 <hr>
+	<div class="row">
+	<div class="col-sm-6">
+	  <br><br><h1 align="center"><a target="_blank" href="{{ url_for('static',filename='data.txt')}}"><button type="button" class="btn btn-success">USER ID</button></a></h1>
+		<h1 class="form-signin-heading text-muted"></h1>
+		<center><input type="text" class="form-control"style="width:200px !important;" placeholder="Enter user ID" id="uid" required="" autofocus="">
+		<br><br>
+		<input class="btn btn-lg btn-success btn-block" type="submit" value="Recommend using CF" data-toggle="modal" data-target="#myModal4" onclick="result()" style="width:250px !important;">
+		</center></div>
+	<div class="col-sm-6">
+<br><br>
+
+<!-- To link any page or source file in flask we use this format {{ url_for('static',filename='user_news_data.txt')}} -->
+
+
+	<h1 align="center"><a target="_blank" href="{{ url_for('static',filename='user_news_data.txt')}}"><button type="button" class="btn btn-success">USER ID</button></a></h1>
+	<h1 class="form-signin-heading text-muted"></h1>
+		<center><input type="text" class="form-control"style="width:200px !important;" placeholder="Enter user ID" id="uid1" required="" autofocus="">
+		<br><br>
+		<input class="btn btn-lg btn-success btn-block" type="submit" value="Recommend using NLP" data-toggle="modal" data-target="#myModal5" onclick="result1()" style="width:250px !important;">
+		</center>
+	</div>
+      <p></p>
+    </div>
+    <div class="col-sm-2">
+      <!--<div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+		 <h4 align="top">About Us</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+		<center><h3>NEWS RECOMMENDATION SYSTEM<br> FOR <span style="color:BLUE">NEWS APP</span></h3></center><br><br>
+             <span><tt> This project is about the Recommendation of news to the users of the <mark> DON</mark> app.<br><br>
+		With the help of the Google Analytics and app database, we found a pattern about the user-news interaction<br>
+		and using that we got user's temporary and permanent interests.Thus,by using these interests, we recommend news to the users.
+We have also used NLP to recommend news articles</tt></span>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+		 <div class="row">
+    <div class="col-sm-6">
+	<p class="text-left">Need help?</a></p>
+    </div>
+    <div class="col-sm-6"> 
+      <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+          Close
+         </button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<!--End-->
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		 <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+		 <h4 align="top">Project</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+		<h5 class="text-center">NEWS RECOMMENDATION SYSTEM</h5><br><br>
+		<span>This PROJECT includes 6 stages:-</span><br/>
+	<ol>
+	<li>Data gathering and Mining</li>
+	<li>Data Preprocessing</li>
+	<li>Implementation of various Python libararies like pandas,graphlab,numpy and flask.</li>
+	<li>Implementation of Collaborative Filtering (Item-Item Similarity)</li>
+	<li>Implementation of NLP</li>
+	<li>Desining of Front-end</li>
+	<li>Testing and Debugging.</li>
+	</ol>
+
+	<br>
+	<br>	
+	<center><ol><li>TRIANING DATA: - 1 JUNE TO 18 JUNE(more than 1 lakh entries)</li>
+		    <li>TESTING DATA:-   19 JUNE to 25 JUNE(more than 40 thousand entries)</li></center>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+		 <div class="row">
+    <div class="col-sm-6">
+	<p class="text-left">Need help?</a></p>
+    </div>
+    <div class="col-sm-6"> 
+      <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+          Close
+         </button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- end-->
+  
+	<!-- Modal -->
+  <div class="modal fade" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		 <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+		 <h4 align="top">News Recommendation</h4>
+        </div>
+        <div class="modal-body">
+          <div id="recommend"></div>
+        </div>
+        <div class="modal-footer">
+		 <div class="row">
+    <div class="col-sm-6">
+	<p class="text-left">Need help?</a></p>
+    </div>
+    <div class="col-sm-6"> 
+      <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+          Close
+         </button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- end-->
+
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		 <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+		 <h4 align="top">News Recommendation</h4>
+        </div>
+        <div class="modal-body">
+          <div id="recommend1"></div>
+        </div>
+        <div class="modal-footer">
+		 <div class="row">
+    <div class="col-sm-6">
+	<p class="text-left">Need help?</a></p>
+    </div>
+    <div class="col-sm-6"> 
+      <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+          Close
+         </button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- end-->
+
+  
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+		<h4 align="top">Instructions</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+		<ol>
+			<li>Enter a user-id in the text box.</li>
+			<li><i><u>To See All USER ID</u></i>.Click on<font style="color:blue">USER ID</font>button</li>			
+			<li>CLICK on <strong>RECOMMEND</strong> button</li>
+			<li><i>See the top 10 news titles with their ids.</li>
+			</ol>
+		
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+		 <div class="row">
+    <div class="col-sm-6">
+	<p class="text-left">Need help?</a></p>
+    </div>
+    <div class="col-sm-6"> 
+      <button type="submit" class="btn btn-primary btn-default pull-right" data-dismiss="modal">
+          Close
+         </button>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- end-->
+<!--Data Retrieval code-->
+<script type="text/javascript">
+//This function will call when user press the Recommend using CF button
+function result()
+{
+
+            //Prediction Result
+		let url = "http://127.0.0.1:5000/recommendation/";
+		let input = document.getElementById("uid");
+		url = url + parseInt(input.value);
+		console.debug(input.value);
+		let xmlHttp = new XMLHttpRequest(); //ajax call to directly access the prediction api
+		xmlHttp.open( "GET", url, false ); // false for synchronous request
+		xmlHttp.send(null);
+		result = JSON.parse(xmlHttp.responseText);
+		//This will show result in Pop Up Box modal5
+		document.getElementById('recommend').innerHTML ="<ul><li>"+ result[0]+"</li><br/><li>"+result[1]+"</li><br/><li>"+result[2]+"</li><br/><li>"+result[3]+"</li><br/><li>"+result[4]+"</li><br/><li>"+result[5]+"</li><br/><li>"+result[6]+"</li><br/><li>"+result[7]+"</li><br/><li>"+result[8]+"</li><br/><li>"+result[9]+"</li></ul>";
+}
+</script>
+<!--end-->
+
+<!--Data Retrieval code-->
+<script type="text/javascript">
+
+// This function will call when user press the Recommend using NLP button
+
+function result1()
+{
+
+            //Prediction Result
+		let url = "http://127.0.0.1:5000/recommendation_nlp/";
+		let input = document.getElementById("uid1");
+		url = url + parseInt(input.value);
+
+		console.debug(input.value);
+		let xmlHttp = new XMLHttpRequest(); //ajax call to directly access the prediction api
+		xmlHttp.open( "GET", url, false ); // false for synchronous request
+		xmlHttp.send(null);
+		result = JSON.parse(xmlHttp.responseText);
+		//this will print the result in Pop up Box modal4
+		document.getElementById('recommend1').innerHTML ="<br>"+ result[0]+"<br/>"+result[1]+"<br/><ul><li>"+result[2]+"</li><br/><li>"+result[3]+"</li><br/><li>"+result[4]+"</li><br/><li>"+result[5]+"</li><br/><li>"+result[6]+"</li><br/><li>"+result[7]+"</li><br/><li>"+result[8]+"</li><br/><li>"+result[9]+"</li><br><li>"+result[10]+"</li><br><li>"+result[11]+"</li></ul>";
+}
+</script>
+<!--end-->
+
+
+<!--Typed.js-->
+<script type="text/javascript" src="{{ url_for('static',filename='js/typed.js')}}"></script>
+    <script>
+	//This will predict WELCOME USER String
+      $(function(){
+          $("#head-title2").typed({
+            strings: ["USER"],
+            typeSpeed: 250,
+            loop: true,
+            startDelay: 100
+          });
+      });
+    </script>
+
+</body>
+</html>
