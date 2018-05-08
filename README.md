@@ -1,8 +1,8 @@
 
-B
-B
-B
-
-C
 # News-Recommendation-System
-scikit learn, graphlib, flask, NLP
+
+
+Collaborative Filtering and Content based filtering using GraphLib Library.
+
+Flask and NLP
+
